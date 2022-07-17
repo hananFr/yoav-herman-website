@@ -34,6 +34,6 @@ app.use('/api/products', products);
 
 
 
-const port = 3900;
+const port = 80;
 http.listen(port, () => console.log(`Listening on port ${port}...`));
 

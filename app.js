@@ -44,6 +44,6 @@ app.use('/api/products', products);
 
 
 
-const port = 3000;
+const port = process.env.port || 3000;
 http.listen(port, () => console.log(`Listening on port ${port}...`));
 

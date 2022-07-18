@@ -47,11 +47,7 @@ router.get('/use/:id',auth, async (req, res) => {
 
 
 router.put('/admin/:id',adminAuth, async (req, res) => {
-
-    
     let user = await User.findById(req.params.id)
-    
-
     const updateUser = await User.findOneAndUpdate({_id: req.params.id}, {
         name: user.name,
         email: user.email,
@@ -64,16 +60,6 @@ router.put('/admin/:id',adminAuth, async (req, res) => {
     res.send(updateUser)
 })
 
-router.patch('/cards', auth, async (req, res) => {
-    const { error } = validateCards(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
-    const cards = await getCards(req.body.cards);
-    if (cards.length != req.body.cards.length) res.status(400).send('.לא שמרת סיורים במועדפים');
-    let user = await User.findById(req.user._id);
-    user.cards = req.body.cards;
-    user = await user.save();
-    res.send(user);
-})
 
 
 

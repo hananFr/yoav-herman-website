@@ -15,12 +15,12 @@ const { decode, encode } = require('querystring');
 
 
 const dir = __dirname + '/uploads';
-if (!path.existsSync(dir)) {
+if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, 0744);
 }
 
 const dir1 = __dirname + '/images';
-if (!path.existsSync(dir1)) {
+if (!fs.existsSync(dir1)) {
     fs.mkdirSync(dir, 0744);
 }
 

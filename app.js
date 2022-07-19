@@ -16,12 +16,12 @@ const { decode, encode } = require('querystring');
 
 const dir = __dirname + '/uploads';
 if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, 0744);
+    fs.mkdirSync(dir);
 }
 
 const dir1 = __dirname + '/images';
 if (!fs.existsSync(dir1)) {
-    fs.mkdirSync(dir, 0744);
+    fs.mkdirSync(dir);
 }
 
 const password = encodeURIComponent("1q2w3e4r5t^Y");

@@ -43,6 +43,10 @@ router.get('/use/:id',auth, async (req, res) => {
     const user = await User.findById(req.params.id).select('-password');
     res.send(user);
 });
+router.get('/admin/:id',auth, async (req, res) => {
+    const admin = await User.findById(req.params.id).select('admin');
+    res.send(admin);
+});
 
 
 

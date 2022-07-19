@@ -51,7 +51,7 @@ router.get("/image/:id", async (req, res) =>{
 
 
 router.get("/my-cards", async (req, res) => {
-    const cards = await Card.find(req.body.id);
+    const cards = await Card.find(req.body._id);
     res.send(cards);
 })
 

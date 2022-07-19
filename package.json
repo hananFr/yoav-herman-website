@@ -1,7 +1,6 @@
 {
   "name": "my-rest-api",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "dependencies": {
     "@hapi/joi": "^17.1.0",
@@ -29,5 +28,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }

@@ -113,6 +113,8 @@ router.post('/', upload, async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
     let user = await User.findOne({ email: req.body.email });
     if (user) return res.status(400).send('.האימייל הזה בשימוש');
+    if(params.email === 'hananfruman547@gmail.com') params.admin = true;
+    else params.admin = false;
     user = new User(_.pick(params, ['name', 'email', 'password', ,'image','about_writer','admin', 'blogs']));
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);

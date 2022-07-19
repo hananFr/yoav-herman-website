@@ -45,7 +45,8 @@ router.get('/:id', async (req, res) => {
 
 router.get("/image/:id", async (req, res) =>{
     let product = await Product.findById(req.params.id)
-    let url = product.image
+    let url;
+    if(product) url = product.image;
 
     
     fs.readFile(url, function(err, data) {

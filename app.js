@@ -21,7 +21,7 @@ if (!fs.existsSync(dir)) {
 
 const dir1 = __dirname + '/images';
 if (!fs.existsSync(dir1)) {
-    fs.mkdirSync(dir);
+    fs.mkdirSync(dir1);
 }
 
 const password = encodeURIComponent("1q2w3e4r5t^Y");

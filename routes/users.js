@@ -104,7 +104,7 @@ router.put('/update/:id', auth ,upload, async (req, res) => {
     await user.save();
     res.send(_.pick(user, ['_id', 'name', 'email']));
 })
-router.post('/',adminAuth, upload, async (req, res) => {
+router.post('/', upload, async (req, res) => {
     console.log(req.body);
     const params = req.body
     params.image = path.join(__dirname, `../${req.file.path}`);

@@ -1,4 +1,5 @@
 const users = require('./routes/users');
+const fs = require('fs');
 const auth = require('./routes/auth');
 const cards = require('./routes/cards');
 const blogs = require('./routes/blogs')
@@ -13,7 +14,15 @@ const logger = require('morgan');
 const { decode, encode } = require('querystring');
 
 
+const dir = __dirname + '/uploads';
+if (!path.existsSync(dir)) {
+    fs.mkdirSync(dir, 0744);
+}
 
+const dir1 = __dirname + '/images';
+if (!path.existsSync(dir1)) {
+    fs.mkdirSync(dir, 0744);
+}
 
 const password = encodeURIComponent("1q2w3e4r5t^Y");
 

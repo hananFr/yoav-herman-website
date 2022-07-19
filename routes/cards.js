@@ -40,6 +40,7 @@ const upload = multer({
 router.get("/image/:id", async (req, res) =>{
     let card = await Card.findById(req.params.id)
     let url = card.travelImage
+    console.log(card);
 
     
     fs.readFile(url, function(err, data) {

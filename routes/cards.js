@@ -67,7 +67,7 @@ router.put('/:id', adminAuth, upload, async (req, res) => {
     console.log(params);
     console.log(req.file);
     if (req.file) {
-        params.travelImage = `${apiUrl}/${req.file.path}`;
+        params.travelImage = `${apiUrl}${req.file.path}`;
         console.log(params.travelImage);
         const card = await Card.findById(req.params.id)
         fs.unlinkSync(card.travelImage);
@@ -131,7 +131,7 @@ router.get("/category/:id", async (req, res) => {
 
 router.post('/uploads', adminAuth, upload, async (req, res) => {
     let params = req.body;
-    params.travelImagel = `${apiUrl}/${req.file.path}`;
+    params.travelImagel = `${apiUrl}${req.file.path}`;
     console.log(params.travelImage);
     const { error } = validateCard(req.body);
     if (error) return res.status(400).send(error.details[0].message);

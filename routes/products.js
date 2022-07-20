@@ -80,6 +80,8 @@ router.put('/update/:id', adminAuth, upload, async (req, res) => {
 
 router.post('/upload', adminAuth, upload, async (req, res) => {
     const params = req.body
+    console.log(__dirname);
+    console.log(req.file.path);
     params.image = path.join(__dirname, `../${req.file.path}`);
     const { errors } = productValidate(params);
     if(errors) res.status(400).send('Requset denied!')

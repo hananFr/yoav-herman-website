@@ -52,7 +52,7 @@ router.get("/image/:id", async (req, res) =>{
 
     
     fs.readFile(url, function(err, data) {
-        if (err) throw err; 
+        if (err) console.log(err); 
           res.writeHead(200, {'Content-Type': 'image/jpeg'});
           res.end(data); 
       });

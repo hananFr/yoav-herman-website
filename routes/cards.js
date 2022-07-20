@@ -9,13 +9,12 @@ const { User } = require('../models/user');
 const fs = require('fs');
 const path = require('path');
 const adminAuth = require('../middleware/adminAuth');
-
-
-
-
+import { apiUrl } from '../config.json';
 
 const storage = multer.diskStorage({
-    destination: './uploads',
+    destination: function (req, file, cb) {
+        cb(null, './uploads')
+    },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
     }
@@ -44,8 +43,6 @@ router.get("/image/:id", async (req, res) => {
         url = card.travelImage;
     }
 
-
-
     fs.readFile(url, function (err, data) {
         if (err) throw err;
         res.writeHead(200, { 'Content-Type': 'image/jpeg' });
@@ -70,7 +67,8 @@ router.put('/:id', adminAuth, upload, async (req, res) => {
     console.log(params);
     console.log(req.file);
     if (req.file) {
-        params.travelImage = path.join(__dirname, `../${req.file.path}`);
+        params.travelImage = `${apiUrl}/${req.file.path}`;
+        console.log(params.travelImage);
         const card = await Card.findById(req.params.id)
         fs.unlinkSync(card.travelImage);
     }
@@ -132,10 +130,9 @@ router.get("/category/:id", async (req, res) => {
 
 
 router.post('/uploads', adminAuth, upload, async (req, res) => {
-    console.log(req.file);
-    console.log(req.body);
     let params = req.body;
-    if (req.file) params.travelImage = path.join(__dirname, `../${req.file.path}`);
+    params.travelImagel = `${apiUrl}/${req.file.path}`;
+    console.log(params.travelImage);
     const { error } = validateCard(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     let card = new Card(

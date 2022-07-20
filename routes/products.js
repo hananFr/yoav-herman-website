@@ -80,7 +80,7 @@ router.put('/update/:id', adminAuth, upload, async (req, res) => {
 
 router.post('/upload', adminAuth, upload, async (req, res) => {
     const params = req.body
-    params.image =  `https://yoav-herman-website.herokuapp.com${req.file.path}`
+    params.image =  `https://yoav-herman-website.herokuapp.com/${req.file.path}`
     const { errors } = productValidate(params);
     if(errors) res.status(400).send('Requset denied!')
     const product = new Product(params)

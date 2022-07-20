@@ -51,7 +51,7 @@ router.get("/image/:id", async (req, res) =>{
     if(product) url = product.image;
 
     
-    fs.readFileSync(url, function(err, data) {
+    fs.readFile(url, function(err, data) {
         if (err) console.log(err); 
           res.writeHead(200, {'Content-Type': 'image/jpeg'});
           res.end(data); 

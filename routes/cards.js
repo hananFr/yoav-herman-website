@@ -131,7 +131,7 @@ router.get("/category/:id", async (req, res) => {
 
 router.post('/uploads', adminAuth, upload, async (req, res) => {
     let params = req.body;
-    params.travelImagel = `${apiUrl}${req.file.path}`;
+    params.travelImagel = `https://yoav-herman-website.herokuapp.com/${req.file.path}`;
     console.log(params.travelImage);
     const { error } = validateCard(req.body);
     if (error) return res.status(400).send(error.details[0].message);

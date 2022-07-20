@@ -39,10 +39,12 @@ mongoose.connect(uri, {
 .catch(err => console.error(err));
 
 
-app.use(express.urlencoded({extended: false}))
-app.use(logger('dev'))
-app.use(cors())
+app.use(express.urlencoded({extended: false}));
+app.use(logger('dev'));
+app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static('./uploads'));
+app.use('/images', express.static('./images'));
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/api/cards', cards);

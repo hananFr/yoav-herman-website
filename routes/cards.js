@@ -9,7 +9,7 @@ const { User } = require('../models/user');
 const fs = require('fs');
 const path = require('path');
 const adminAuth = require('../middleware/adminAuth');
-const  apiUrl = require( '../config.json');
+const  apiUrl = 'https://yoav-herman-website.herokuapp.com/';
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {

@@ -9,8 +9,6 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "express-fileupload": "^1.2.1",
-    "express-handlebars": "^5.3.2",
     "joi-browser": "^13.4.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
@@ -18,8 +16,7 @@
     "mongoose": "^5.13.5",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
-    "nodemon": "^2.0.19",
-    "socket.io": "^4.2.0"
+    "nodemon": "^2.0.19"
   },
   "devDependencies": {},
   "scripts": {

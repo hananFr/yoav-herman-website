@@ -51,6 +51,12 @@ router.get("/image/:id", async (req, res) => {
 })
 
 
+router.get('/website', async (req,res) => {
+    const cards = await Card.find(req.body.id).sort({travelDate: -1}).limit(3);
+    res.send(cards)
+})
+
+
 router.get("/my-cards", async (req, res) => {
     const cards = await Card.find(req.body.id);
     res.send(cards);

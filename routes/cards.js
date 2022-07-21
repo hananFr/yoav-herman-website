@@ -144,6 +144,7 @@ router.post('/uploads', adminAuth, upload, async (req, res) => {
     let card = new Card(
         {
             travelName: req.body.travelName,
+            headerContext: req.body.headerContext,
             travelDescription: req.body.travelDescription,
             travelAddress: req.body.travelAddress,
             travelImage: params.travelImage,

@@ -16,6 +16,13 @@ const cardSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 1024
   },
+  headerContext: {
+    type: String,
+    required: true,
+    minlength: 10,
+    maxlength: 100
+  }
+  ,
   travelAddress: {
     type: String,
     required: true,
@@ -55,6 +62,7 @@ function validateCard(card) {
   const schema = Joi.object({
     travelName: Joi.string().min(2).max(255).required(),
     travelDescription: Joi.string().min(2).max(1024).required(),
+    headerContext: Joi.string().min(10).max(100).required(),
     travelAddress: Joi.string().min(2).max(400).required(),
     travelCategory: Joi.string().min(2).max(1024),
     travelImage: Joi.required(),

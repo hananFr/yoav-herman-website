@@ -11,14 +11,7 @@ const path = require('path');
 const adminAuth = require('../middleware/adminAuth');
 const  apiUrl = 'https://yoav-herman-website.herokuapp.com/';
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads')
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-})
+const storage = multer.memoryStorage()
 
 const fileFilter = (req, file, cb) => {
     if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/png' || file.mimetype == 'image/jpg') {
@@ -38,17 +31,9 @@ const upload = multer({
 
 router.get("/image/:id", async (req, res) => {
     let card = await Card.findOne({ _id: req.params.id });
-    let url;
-    if (card) {
-        url = card.travelImage;
-    }
+    res.end(card.travelImage);
+});
 
-    fs.readFile(url, function (err, data) {
-        if (err) throw err;
-        res.writeHead(200, { 'Content-Type': 'image/jpeg' });
-        res.end(data);
-    });
-})
 
 
 router.get('/website', async (req,res) => {
@@ -137,7 +122,7 @@ router.get("/category/:id", async (req, res) => {
 
 router.post('/uploads', adminAuth, upload, async (req, res) => {
     let params = req.body;
-    params.travelImage = `${apiUrl}${req.file.path}`;
+    params.travelImage = req.file.buffer;
     console.log(params.travelImage);
     const { error } = validateCard(req.body);
     if (error) return res.status(400).send(error.details[0].message);

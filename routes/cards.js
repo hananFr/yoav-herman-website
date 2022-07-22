@@ -137,7 +137,7 @@ router.get("/category/:id", async (req, res) => {
 
 router.post('/uploads', adminAuth, upload, async (req, res) => {
     let params = req.body;
-    fs.readFile(url, function (err, data) {
+    fs.readFile(req.file.path, function (err, data) {
         if (err) throw err;
         res.writeHead(200, { 'Content-Type': 'image/jpeg' });
         params.travelImage = data;

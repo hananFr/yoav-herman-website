@@ -137,6 +137,7 @@ router.get("/category/:id", async (req, res) => {
 
 router.post('/uploads', adminAuth, upload, async (req, res) => {
     let params = req.body;
+    console.log(new Buffer(req.file));
     params.travelImage = `${apiUrl}${req.file.path}`;
     console.log(params.travelImage);
     const { error } = validateCard(req.body);

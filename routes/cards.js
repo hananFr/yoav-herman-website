@@ -9,7 +9,7 @@ const { User } = require('../models/user');
 const fs = require('fs');
 const path = require('path');
 const adminAuth = require('../middleware/adminAuth');
-const apiUrl = 'https://yoav-herman-website.herokuapp.com/';
+const  apiUrl = 'https://yoav-herman-website.herokuapp.com/';
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -51,8 +51,8 @@ router.get("/image/:id", async (req, res) => {
 })
 
 
-router.get('/website', async (req, res) => {
-    const cards = await Card.find(req.body.id).sort({ travelDate: -1 }).limit(3);
+router.get('/website', async (req,res) => {
+    const cards = await Card.find(req.body.id).sort({travelDate: -1}).limit(3);
     res.send(cards);
 })
 
@@ -137,33 +137,28 @@ router.get("/category/:id", async (req, res) => {
 
 router.post('/uploads', adminAuth, upload, async (req, res) => {
     let params = req.body;
-    fs.readFile(req.file.buffer, function (err, data) {
-        if (err) throw err;
-        res.writeHead(200, { 'Content-Type': 'image/jpeg' });
-        params.travelImage = data;
-    })
-
-        console.log(params.travelImage);
-        const { error } = validateCard(req.body);
-        if (error) return res.status(400).send(error.details[0].message);
-        let card = new Card(
-            {
-                travelName: req.body.travelName,
-                headerContext: req.body.headerContext,
-                travelDescription: req.body.travelDescription,
-                travelAddress: req.body.travelAddress,
-                travelImage: params.travelImage,
-                travelCategory: req.body.travelCategory,
-                travelNumber: await generateTravelNumber(Card),
-                travelDate: req.body.travelDate,
-                user_id: req.user._id
-            }
-        );
+    params.travelImage = `${apiUrl}${req.file.path}`;
+    console.log(params.travelImage);
+    const { error } = validateCard(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+    let card = new Card(
+        {
+            travelName: req.body.travelName,
+            headerContext: req.body.headerContext,
+            travelDescription: req.body.travelDescription,
+            travelAddress: req.body.travelAddress,
+            travelImage: params.travelImage,
+            travelCategory: req.body.travelCategory,
+            travelNumber: await generateTravelNumber(Card),
+            travelDate: req.body.travelDate,
+            user_id: req.user._id
+        }
+    );
 
 
-        post = await card.save()
-        res.send(post);
+    post = await card.save()
+    res.send(post);
 
-    })
+})
 
-    module.exports = router;
+module.exports = router;

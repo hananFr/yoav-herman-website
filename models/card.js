@@ -37,7 +37,7 @@ const cardSchema = new mongoose.Schema({
     unique: true
   },
   travelImage: {
-    type: Buffer,
+    type: String,
     required: true,
   },
 

@@ -38,9 +38,17 @@ const upload = multer({
 
 router.get("/image/:id", async (req, res) => {
     let card = await Card.findOne({ _id: req.params.id });
-    res.end(card.travelImage);
-    });
+    let url;
+    if (card) {
+        url = card.travelImage;
+    }
 
+    fs.readFile(url, function (err, data) {
+        if (err) throw err;
+        res.writeHead(200, { 'Content-Type': 'image/jpeg' });
+        res.end(data);
+    });
+})
 
 
 router.get('/website', async (req,res) => {
@@ -129,7 +137,7 @@ router.get("/category/:id", async (req, res) => {
 
 router.post('/uploads', adminAuth, upload, async (req, res) => {
     let params = req.body;
-    console.log(req.file);
+    if (req.file) params.travelImage = req.file.buffer;
     
     console.log(params.travelImage);
     const { error } = validateCard(req.body);

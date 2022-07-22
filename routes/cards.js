@@ -129,7 +129,8 @@ router.get("/category/:id", async (req, res) => {
 
 router.post('/uploads', adminAuth, upload, async (req, res) => {
     let params = req.body;
-    params.travelImage = req.file.stream;
+    console.log(req.file);
+    
     console.log(params.travelImage);
     const { error } = validateCard(req.body);
     if (error) return res.status(400).send(error.details[0].message);
